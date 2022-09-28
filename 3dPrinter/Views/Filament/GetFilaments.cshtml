@@ -1,0 +1,48 @@
+﻿@model IEnumerable<_3dPrinter.Domain.Entity.Filament>
+
+@{
+    ViewBag.Title = "Filaments";
+    Layout = "_Layout";
+}
+<br>
+<h2>List of Filaments</h2>
+<br>
+<a class="btn btn-primary btn-sm" asp-action="Save">New Filament</a>
+<br>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Filament</th>
+            <th>Manufacturer</th>
+            <th>Temp of print</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    @if (Model == null)
+    {
+        <tbody>
+            <tr>
+                <td colspan="4" align="center">List of filaments is empty. Please add new filament</td>
+            </tr>
+        </tbody>
+    }
+    else
+    {
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Manufacturer</td>
+                    <td>@item.TempOfPrint</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-action="Save">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+</table>

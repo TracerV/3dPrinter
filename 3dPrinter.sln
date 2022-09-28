@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3dPrinter", "3dPrinter\3dPrinter.csproj", "{616B67B1-5C60-4E16-BA91-7DA6EF1859A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1919A4C9-53CC-4C7E-8711-241C3EAE84EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3dPrinter.Domain", "3dPrinter.Domain\3dPrinter.Domain.csproj", "{5502ABEC-7E61-4885-80E8-2BF934D0B15A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{3C704741-2E29-4B6C-8B59-48CA3C7AEBDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3dPrinter.DAL", "3dPrinter.DAL\3dPrinter.DAL.csproj", "{1FCAF0A3-08FA-4A6C-9C7C-409CD9919C43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{8376320E-A444-40E1-8D7A-E4CA1441E515}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3dPrinter.Service", "3dPrinter.Service\3dPrinter.Service.csproj", "{D2BAEC32-ADF7-463B-9845-78E84861450D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{616B67B1-5C60-4E16-BA91-7DA6EF1859A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616B67B1-5C60-4E16-BA91-7DA6EF1859A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616B67B1-5C60-4E16-BA91-7DA6EF1859A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616B67B1-5C60-4E16-BA91-7DA6EF1859A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5502ABEC-7E61-4885-80E8-2BF934D0B15A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5502ABEC-7E61-4885-80E8-2BF934D0B15A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5502ABEC-7E61-4885-80E8-2BF934D0B15A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5502ABEC-7E61-4885-80E8-2BF934D0B15A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCAF0A3-08FA-4A6C-9C7C-409CD9919C43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCAF0A3-08FA-4A6C-9C7C-409CD9919C43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCAF0A3-08FA-4A6C-9C7C-409CD9919C43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCAF0A3-08FA-4A6C-9C7C-409CD9919C43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2BAEC32-ADF7-463B-9845-78E84861450D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2BAEC32-ADF7-463B-9845-78E84861450D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2BAEC32-ADF7-463B-9845-78E84861450D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2BAEC32-ADF7-463B-9845-78E84861450D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5502ABEC-7E61-4885-80E8-2BF934D0B15A} = {1919A4C9-53CC-4C7E-8711-241C3EAE84EB}
+		{1FCAF0A3-08FA-4A6C-9C7C-409CD9919C43} = {3C704741-2E29-4B6C-8B59-48CA3C7AEBDD}
+		{D2BAEC32-ADF7-463B-9845-78E84861450D} = {8376320E-A444-40E1-8D7A-E4CA1441E515}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81EEAAB2-F8E3-4483-8C06-EC8E20B57EF0}
+	EndGlobalSection
+EndGlobal

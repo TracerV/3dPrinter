@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_3dPrinter.Service</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\3dPrinter.DAL\3dPrinter.DAL.csproj" />
+    <ProjectReference Include="..\3dPrinter.Domain\3dPrinter.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

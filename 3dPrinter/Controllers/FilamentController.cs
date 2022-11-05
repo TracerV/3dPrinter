@@ -33,7 +33,7 @@ namespace _3dPrinter.Controllers
             var response = await _filamentService.GetFilament(model.Id);
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
-                return PartialView("Delete",response.Data);
+                return PartialView("DeletePartial",response.Data);
             }
             ModelState.AddModelError("",response.Description);
             return PartialView();
@@ -57,12 +57,12 @@ namespace _3dPrinter.Controllers
             if (id == 0)
             {
                 var resp = new FilamentViewModel();
-                return PartialView("AddEdit",resp);
+                return PartialView("AddEditPartial",resp);
             }
             var response = await _filamentService.GetFilament(id);
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
-                return PartialView("AddEdit",response.Data);
+                return PartialView("AddEditPartial",response.Data);
             }
             ModelState.AddModelError("",response.Description);
             return PartialView();

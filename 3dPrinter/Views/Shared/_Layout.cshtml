@@ -6,11 +6,12 @@
 </head>
 <body>
     @await Html.PartialAsync("HeaderPartial")
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+    @* @await Html.PartialAsync("ModalPartial") *@
     @await Html.PartialAsync("FooterPartial")
     @await Html.PartialAsync("ScriptsPartial")
     @await RenderSectionAsync("Scripts", required: false)

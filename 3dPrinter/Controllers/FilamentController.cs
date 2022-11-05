@@ -1,13 +1,9 @@
-﻿using _3dPrinter.DAL.Interfaces;
-using _3dPrinter.Domain.Entity;
-using _3dPrinter.Domain.ViewModels.Filament;
-using _3dPrinter.Models;
+﻿using _3dPrinter.Domain.ViewModels.Filament;
 using _3dPrinter.Service.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+// using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
+// using _3dPrinter.Domain.Entity;
 
 namespace _3dPrinter.Controllers
 {
@@ -30,48 +26,50 @@ namespace _3dPrinter.Controllers
             }
             return View("Error",$"{response.Description}");
         }
-
+        
         [HttpGet]
-        public async Task<IActionResult> GetFilament(int id)
+        public async Task<IActionResult> Delete(FilamentViewModel model)
         {
-            var response = await _filamentService.GetFilament(id);
+            var response = await _filamentService.GetFilament(model.Id);
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
-                return View(response.Data);
+                return PartialView("Delete",response.Data);
             }
-            return View("Error", $"{response.Description}");
+            ModelState.AddModelError("",response.Description);
+            return PartialView();
         }
-
-        [Authorize(Roles = "Admin")]
+        
+       [HttpPost]
         public async Task<IActionResult> Delete(int id)
-        {
-            var response = await _filamentService.DeleteFilament(id);
-            if (response.StatusCode == Domain.Enum.StatusCode.OK)
-            {
-                return RedirectToAction("GetFilaments");
-            }
-            return RedirectToAction("Error");
+         {
+             var response = await _filamentService.DeleteFilament(id);
+             if (response.StatusCode == Domain.Enum.StatusCode.OK)
+             {
+                 return RedirectToAction("GetFilaments");
+                 // return PartialView("Delete");
+             }
+             return View("Error", $"{response.Description}");
+         }
 
-        }
-
-        [HttpGet]
-        //[Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Save(int id)
+       [HttpGet]
+        public async Task<IActionResult> AddEdit(int id)
         {
             if (id == 0)
             {
-                return View();
+                var resp = new FilamentViewModel();
+                return PartialView("AddEdit",resp);
             }
             var response = await _filamentService.GetFilament(id);
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
-                return View(response.Data);
+                return PartialView("AddEdit",response.Data);
             }
-            return RedirectToAction("Error");
+            ModelState.AddModelError("",response.Description);
+            return PartialView();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(FilamentViewModel model)
+        public async Task<IActionResult> AddEdit(FilamentViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -84,6 +82,7 @@ namespace _3dPrinter.Controllers
                     await _filamentService.Edit(model.Id, model);
                 }
                 return RedirectToAction("GetFilaments");
+                // return PartialView("AddEdit",model);
             }
             return View();
         }

@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace _3dPrinter.Service.Implementations
@@ -24,7 +23,7 @@ namespace _3dPrinter.Service.Implementations
 
         public async Task<IBaseResponse<FilamentViewModel>> GetFilament(int id)
         {
-
+        
             try
             {
                 var filament = await _filamentRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
@@ -38,6 +37,7 @@ namespace _3dPrinter.Service.Implementations
                 }
                 var data = new FilamentViewModel()
                 {
+                    Id = filament.Id,
                     Name = filament.Name,
                     Manufacturer = filament.Manufacturer,
                     TempOfPrint = filament.TempOfPrint,
@@ -58,7 +58,7 @@ namespace _3dPrinter.Service.Implementations
                 };
             }
         }
-
+        
         public IBaseResponse<List<Filament>> GetFilaments()
         {
             try
@@ -175,7 +175,7 @@ namespace _3dPrinter.Service.Implementations
             {
                 return new BaseResponse<Filament>()
                 {
-                    Description = $"[EditFilament] : {ex.Message}",
+                    Description = $"[Edit] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
                 };
             }

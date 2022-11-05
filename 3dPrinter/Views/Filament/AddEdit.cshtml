@@ -1,0 +1,45 @@
+@model _3dPrinter.Domain.ViewModels.Filament.FilamentViewModel
+@{
+    var t = Model?.Id != 0 ? "Edit Filament" : "Add Filament";
+}
+<div class="modal fade" id="addFilament">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addFilamentLabel">@t</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddEdit">
+                    <input asp-for="Id" hidden/>
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Manufacturer"></label>
+                        <input asp-for="Manufacturer" class="form-control" />
+                        <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TempOfPrint"></label>
+                        <input asp-for="TempOfPrint" class="form-control" />
+                        <span asp-validation-for="TempOfPrint" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-save="modal">Save</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

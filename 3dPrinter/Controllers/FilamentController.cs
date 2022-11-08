@@ -36,7 +36,8 @@ namespace _3dPrinter.Controllers
                 return PartialView("DeletePartial",response.Data);
             }
             ModelState.AddModelError("",response.Description);
-            return PartialView();
+            // return PartialView();
+            return View("Error",$"{response.Description}");
         }
         
        [HttpPost]
@@ -65,7 +66,8 @@ namespace _3dPrinter.Controllers
                 return PartialView("AddEditPartial",response.Data);
             }
             ModelState.AddModelError("",response.Description);
-            return PartialView();
+            // return PartialView();
+            return View("Error",$"{response.Description}");
         }
 
         [HttpPost]
@@ -84,7 +86,7 @@ namespace _3dPrinter.Controllers
                 return RedirectToAction("GetFilaments");
                 // return PartialView("AddEdit",model);
             }
-            return View();
+            return View("Error");
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using _3dPrinter.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _3dPrinter.DAL
 {
@@ -16,5 +11,6 @@ namespace _3dPrinter.DAL
             Database.EnsureCreated();
         }
         public DbSet<Filament> Filament { get; set; }
+        public DbSet<Customer> Customer { get; set; }
     }
 }

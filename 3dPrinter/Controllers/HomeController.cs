@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
+// using Microsoft.Extensions.Logging;
 
 namespace _3dPrinter.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        // private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        // public HomeController(ILogger<HomeController> logger)
+        // {
+        //     _logger = logger;
+        // }
         public IActionResult Index()
         {
             return View();

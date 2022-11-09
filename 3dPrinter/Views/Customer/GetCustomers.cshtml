@@ -1,0 +1,53 @@
+@model IEnumerable<_3dPrinter.Domain.Entity.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "_Layout";
+}
+
+<h2>List of Customers</h2>
+<div id="PlaceHolderHere"></div>
+<p>
+<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addCustomer"
+        data-url="@Url.Action("AddEdit")">New Customer</button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    @if (Model == null)
+    {
+        <tbody>
+        <tr>
+            <td colspan="4">
+                <div class="d-flex justify-content-center">
+                    List of customers is empty. Please add new customer
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    }
+    else
+    {
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addCustomer"
+                            data-url="@Url.Action($"AddEdit/{item.Id}")">Edit</button>
+                    <button type="button" class="btn btn-danger" data-toggle="ajax-modal" data-target="#delCustomer"
+                            data-url="@Url.Action($"Delete/{item.Id}")">Delete</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    }
+</table>
+

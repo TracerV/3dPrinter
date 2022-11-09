@@ -1,5 +1,3 @@
-using System;
-
 namespace _3dPrinter.Models
 {
     public class ErrorViewModel

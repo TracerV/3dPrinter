@@ -6,15 +6,10 @@ using _3dPrinter.Service.Implementations;
 using _3dPrinter.Service.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace _3dPrinter
 {
@@ -38,6 +33,8 @@ namespace _3dPrinter
 
             services.AddScoped<IBaseRepository<Filament>, FilamentRepository>();
             services.AddScoped<IFilamentService,FilamentService>();
+            services.AddScoped<IBaseRepository<Customer>, CustomerRepository>();
+            services.AddScoped<ICustomerService,CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,23 +1,23 @@
-﻿using _3dPrinter.Domain.ViewModels.Filament;
+using _3dPrinter.Domain.ViewModels.Customer;
 using _3dPrinter.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace _3dPrinter.Controllers
 {
-    public class FilamentController : Controller
+    public class CustomerController : Controller
     {
-        private readonly IFilamentService _filamentService;
+        private readonly ICustomerService _customerService;
 
-        public FilamentController(IFilamentService filamentService)
+        public CustomerController(ICustomerService customerService)
         {
-            _filamentService = filamentService;
+            _customerService = customerService;
         }
 
         [HttpGet]
-        public IActionResult GetFilaments()
+        public IActionResult GetCustomers()
         {
-            var response = _filamentService.GetFilaments();
+            var response = _customerService.GetCustomers();
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
                 return View(response.Data);
@@ -26,26 +26,24 @@ namespace _3dPrinter.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> Delete(FilamentViewModel model)
+        public async Task<IActionResult> Delete(CustomerViewModel model)
         {
-            var response = await _filamentService.GetFilament(model.Id);
+            var response = await _customerService.GetCustomer(model.Id);
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
                 return PartialView("DeletePartial",response.Data);
             }
             ModelState.AddModelError("",response.Description);
-            // return PartialView();
             return View("Error",$"{response.Description}");
         }
         
        [HttpPost]
         public async Task<IActionResult> Delete(int id)
          {
-             var response = await _filamentService.DeleteFilament(id);
+             var response = await _customerService.DeleteCustomer(id);
              if (response.StatusCode == Domain.Enum.StatusCode.OK)
              {
-                 return RedirectToAction("GetFilaments");
-                 // return PartialView("Delete");
+                 return RedirectToAction("GetCustomers");
              }
              return View("Error", $"{response.Description}");
          }
@@ -55,34 +53,32 @@ namespace _3dPrinter.Controllers
         {
             if (id == 0)
             {
-                var resp = new FilamentViewModel();
+                var resp = new CustomerViewModel();
                 return PartialView("AddEditPartial",resp);
             }
-            var response = await _filamentService.GetFilament(id);
+            var response = await _customerService.GetCustomer(id);
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
                 return PartialView("AddEditPartial",response.Data);
             }
             ModelState.AddModelError("",response.Description);
-            // return PartialView();
             return View("Error",$"{response.Description}");
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEdit(FilamentViewModel model)
+        public async Task<IActionResult> AddEdit(CustomerViewModel model)
         {
             if (ModelState.IsValid)
             {
                 if (model.Id == 0)
                 {
-                    await _filamentService.CreateFilament(model);
+                    await _customerService.CreateCustomer(model);
                 }
                 else
                 {
-                    await _filamentService.Edit(model.Id, model);
+                    await _customerService.Edit(model.Id, model);
                 }
-                return RedirectToAction("GetFilaments");
-                // return PartialView("AddEdit",model);
+                return RedirectToAction("GetCustomers");
             }
             return View("Error");
         }

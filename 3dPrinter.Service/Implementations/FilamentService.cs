@@ -32,7 +32,7 @@ namespace _3dPrinter.Service.Implementations
                     return new BaseResponse<FilamentViewModel>()
                     {
                         Description = "Filament not found",
-                        StatusCode = StatusCode.FilamentNotFound
+                        StatusCode = StatusCode.NotFound
                     };
                 }
                 var data = new FilamentViewModel()
@@ -97,7 +97,7 @@ namespace _3dPrinter.Service.Implementations
                     return new BaseResponse<bool>()
                     {
                         Description = "Filament not found",
-                        StatusCode = StatusCode.FilamentNotFound,
+                        StatusCode = StatusCode.NotFound,
                         Data = false
                     };
                 }
@@ -156,7 +156,7 @@ namespace _3dPrinter.Service.Implementations
                     return new BaseResponse<Filament>()
                     {
                         Description = "Filament not found",
-                        StatusCode = StatusCode.FilamentNotFound
+                        StatusCode = StatusCode.NotFound
                     };
                 }
                 filament.Name = model.Name;

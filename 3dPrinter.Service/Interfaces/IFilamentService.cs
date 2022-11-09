@@ -1,10 +1,7 @@
 ﻿using _3dPrinter.Domain.Entity;
 using _3dPrinter.Domain.Response;
 using _3dPrinter.Domain.ViewModels.Filament;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace _3dPrinter.Service.Interfaces

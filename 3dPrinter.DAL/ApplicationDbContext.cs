@@ -10,7 +10,9 @@ namespace _3dPrinter.DAL
         {
             Database.EnsureCreated();
         }
+
         public DbSet<Filament> Filament { get; set; }
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<MyModel> MyModel { get; set; }
     }
 }

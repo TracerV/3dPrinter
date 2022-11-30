@@ -1,0 +1,60 @@
+@model IEnumerable<_3dPrinter.Domain.Entity.MyModel>
+
+@{
+    ViewBag.Title = "Models";
+    Layout = "_Layout";
+}
+
+<h2>List of Models</h2>
+<div id="PlaceHolderHere"></div>
+<p>
+<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addModel"
+        data-url="@Url.Action("AddEdit")">New Model</button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ModelName</th>
+        <th>Filament</th>
+        <th>Customer</th>
+        <th>TimeOfPrint</th>
+        <th>Cost</th>
+    </tr>
+    </thead>
+    @if (Model == null)
+    {
+        <tbody>
+        <tr>
+            <td colspan="4">
+                <div class="d-flex justify-content-center">
+                    List of models is empty. Please add new model
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    }
+    else
+    {
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Filament.Name</td>
+                <td>@item.Customer.Name</td>
+                <td>@item.TimeOfPrint</td>
+                <td>@item.Cost</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addModel"
+                            data-url="@Url.Action($"AddEdit/{item.Id}")">
+                        Edit
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="ajax-modal" data-target="#delModel"
+                            data-url="@Url.Action($"Delete/{item.Id}")">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    }
+</table>

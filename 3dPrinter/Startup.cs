@@ -7,9 +7,11 @@ using _3dPrinter.Service.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 
 namespace _3dPrinter
 {
@@ -29,12 +31,14 @@ namespace _3dPrinter
                     .AddRazorRuntimeCompilation();
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(connection));
+            options.UseNpgsql(connection));
 
             services.AddScoped<IBaseRepository<Filament>, FilamentRepository>();
             services.AddScoped<IFilamentService,FilamentService>();
             services.AddScoped<IBaseRepository<Customer>, CustomerRepository>();
             services.AddScoped<ICustomerService,CustomerService>();
+            services.AddScoped<IBaseRepository<MyModel>, MyModelRepository>();
+            services.AddScoped<IMyModelService, MyModelService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

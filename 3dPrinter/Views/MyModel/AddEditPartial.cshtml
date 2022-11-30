@@ -1,0 +1,50 @@
+@model _3dPrinter.Domain.ViewModels.MyModel.MyModelViewModel
+@{
+    var t = Model?.Id != 0 ? "Edit Model" : "Add Model";
+}
+<div class="modal fade" id="addModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="addModelLabel">@t</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AddEdit">
+                    <input asp-for="Id" hidden/>
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cost"></label>
+                        <input asp-for="Cost" class="form-control"/>
+                        <span asp-validation-for="Cost" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Filament"></label>
+                        <select asp-for="FilamentId" class="form-control" asp-items="ViewBag.FilamentList"></select>
+                        <span asp-validation-for="FilamentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Customer"></label>
+                        <input asp-for="Customer.Name" class="form-control"/>
+                        <span asp-validation-for="Customer.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TimeOfPrint"></label>
+                        <input asp-for="TimeOfPrint" class="form-control"/>
+                        <span asp-validation-for="TimeOfPrint" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-save="modal">Save</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ using _3dPrinter.Domain.Response;
 using _3dPrinter.Domain.ViewModels.Filament;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace _3dPrinter.Service.Interfaces
 {

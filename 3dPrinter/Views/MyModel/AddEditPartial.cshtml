@@ -31,8 +31,8 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Customer"></label>
-                        <input asp-for="Customer.Name" class="form-control"/>
-                        <span asp-validation-for="Customer.Name" class="text-danger"></span>
+                        <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerList"></select>
+                        <span asp-validation-for="CustomerId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="TimeOfPrint"></label>

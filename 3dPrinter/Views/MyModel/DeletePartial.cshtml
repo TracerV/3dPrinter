@@ -1,0 +1,23 @@
+@model _3dPrinter.Domain.ViewModels.MyModel.MyModelViewModel
+
+<div class="modal fade" id="delMyModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="delMyModelLabel">Are you sure?</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Delete">
+                    <input asp-for="Id" hidden/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-delete="modal">Delete</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

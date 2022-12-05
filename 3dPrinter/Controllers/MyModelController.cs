@@ -1,17 +1,24 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using _3dPrinter.Domain.ViewModels.MyModel;
 using _3dPrinter.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace _3dPrinter.Controllers;
 
 public class MyModelController : Controller
 {
     private readonly IMyModelService _modelService;
+    private readonly IFilamentService _filamentService;
+    private readonly ICustomerService _customerService;
 
-    public MyModelController(IMyModelService modelService)
+    public MyModelController(IMyModelService modelService, IFilamentService filamentService,ICustomerService customerService)
     {
         _modelService = modelService;
+        _filamentService = filamentService;
+        _customerService = customerService;
     }
 
     [HttpGet]
@@ -57,16 +64,63 @@ public class MyModelController : Controller
         if (id == 0)
         {
             var resp = new MyModelViewModel();
+            ViewBag.FilamentList = FilamentList();
+            ViewBag.CustomerList = CustomerList();
             return PartialView("AddEditPartial", resp);
         }
+
         var response = await _modelService.GetModel(id);
         if (response.StatusCode == Domain.Enum.StatusCode.OK)
         {
+            ViewBag.FilamentList = FilamentList();
+            ViewBag.CustomerList = CustomerList();
             return PartialView("AddEditPartial", response.Data);
         }
 
         ModelState.AddModelError("", response.Description);
         return View("Error", $"{response.Description}");
+    }
+
+    private List<SelectListItem> FilamentList()
+    {
+        var lstItems =
+            // List<Filament> items = _filamentService.GetFilaments().Data("Name", "", 1, 1000);
+            _filamentService.GetFilaments().Data.Select(ut => new SelectListItem()
+        {
+            Value = ut.Id.ToString(),
+            Text = ut.Name
+        }).ToList();
+
+        var defItem = new SelectListItem()
+        {
+            Value = "",
+            Text = "----Select Filament----"
+        };
+
+        lstItems.Insert(0, defItem);
+
+        return lstItems;
+    }
+    
+    private List<SelectListItem> CustomerList()
+    {
+        var lstItems =
+            // List<Filament> items = _filamentService.GetFilaments().Data("Name", "", 1, 1000);
+            _customerService.GetCustomers().Data.Select(ut => new SelectListItem()
+        {
+            Value = ut.Id.ToString(),
+            Text = ut.Name
+        }).ToList();
+
+        var defItem = new SelectListItem()
+        {
+            Value = "",
+            Text = "----Select Customer----"
+        };
+
+        lstItems.Insert(0, defItem);
+
+        return lstItems;
     }
 
     [HttpPost]

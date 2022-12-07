@@ -1,14 +1,14 @@
-﻿using _3dPrinter.DAL.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using _3dPrinter.DAL.Interfaces;
 using _3dPrinter.Domain.Entity;
 using _3dPrinter.Domain.Enum;
 using _3dPrinter.Domain.Response;
 using _3dPrinter.Domain.ViewModels.Filament;
 using _3dPrinter.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace _3dPrinter.Service.Implementations
 {
@@ -29,13 +29,13 @@ namespace _3dPrinter.Service.Implementations
                 var filament = await _filamentRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (filament == null)
                 {
-                    return new BaseResponse<FilamentViewModel>()
+                    return new BaseResponse<FilamentViewModel>
                     {
                         Description = "Filament not found",
                         StatusCode = StatusCode.NotFound
                     };
                 }
-                var data = new FilamentViewModel()
+                var data = new FilamentViewModel
                 {
                     Id = filament.Id,
                     Name = filament.Name,
@@ -43,7 +43,7 @@ namespace _3dPrinter.Service.Implementations
                     TempOfPrint = filament.TempOfPrint,
                     Price = filament.Price
                 };
-                return new BaseResponse<FilamentViewModel>()
+                return new BaseResponse<FilamentViewModel>
                 {
                     StatusCode = StatusCode.OK,
                     Data = data
@@ -51,7 +51,7 @@ namespace _3dPrinter.Service.Implementations
             }
             catch (Exception ex)
             {
-                return new BaseResponse<FilamentViewModel>()
+                return new BaseResponse<FilamentViewModel>
                 {
                     Description = $"[GetFilament] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
@@ -66,13 +66,13 @@ namespace _3dPrinter.Service.Implementations
                 var filaments = _filamentRepository.GetAll().ToList();
                 if (!filaments.Any())
                 {
-                    return new BaseResponse<List<Filament>>()
+                    return new BaseResponse<List<Filament>>
                     {
                         Description = "Found 0 elements",
                         StatusCode = StatusCode.OK
                     };
                 }
-                return new BaseResponse<List<Filament>>()
+                return new BaseResponse<List<Filament>>
                 {
                     Data = filaments,
                     StatusCode = StatusCode.OK
@@ -80,7 +80,7 @@ namespace _3dPrinter.Service.Implementations
             }
             catch (Exception ex)
             {
-                return new BaseResponse<List<Filament>>()
+                return new BaseResponse<List<Filament>>
                 {
                     Description = $"[GetFilaments] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
@@ -94,7 +94,7 @@ namespace _3dPrinter.Service.Implementations
                 var filament = await _filamentRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (filament == null)
                 {
-                    return new BaseResponse<bool>()
+                    return new BaseResponse<bool>
                     {
                         Description = "Filament not found",
                         StatusCode = StatusCode.NotFound,
@@ -102,7 +102,7 @@ namespace _3dPrinter.Service.Implementations
                     };
                 }
                 await _filamentRepository.Delete(filament);
-                return new BaseResponse<bool>()
+                return new BaseResponse<bool>
                 {
                     Data = true,
                     StatusCode = StatusCode.OK
@@ -110,7 +110,7 @@ namespace _3dPrinter.Service.Implementations
             }
             catch (Exception ex)
             {
-                return new BaseResponse<bool>()
+                return new BaseResponse<bool>
                 {
                     Description = $"[DeleteFilament] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
@@ -122,7 +122,7 @@ namespace _3dPrinter.Service.Implementations
         {
             try
             {
-                var filament = new Filament()
+                var filament = new Filament
                 {
                     Name = model.Name,
                     Manufacturer = model.Manufacturer,
@@ -130,7 +130,7 @@ namespace _3dPrinter.Service.Implementations
                     Price = model.Price
                 };
                 await _filamentRepository.Create(filament);
-                return new BaseResponse<Filament>()
+                return new BaseResponse<Filament>
                 {
                     StatusCode = StatusCode.OK,
                     Data = filament
@@ -138,7 +138,7 @@ namespace _3dPrinter.Service.Implementations
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Filament>()
+                return new BaseResponse<Filament>
                 {
                     Description = $"[CreateFilament] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
@@ -153,7 +153,7 @@ namespace _3dPrinter.Service.Implementations
                 var filament = await _filamentRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (filament == null)
                 {
-                    return new BaseResponse<Filament>()
+                    return new BaseResponse<Filament>
                     {
                         Description = "Filament not found",
                         StatusCode = StatusCode.NotFound
@@ -165,7 +165,7 @@ namespace _3dPrinter.Service.Implementations
                 filament.Price = model.Price;
 
                 await _filamentRepository.Update(filament);
-                return new BaseResponse<Filament>()
+                return new BaseResponse<Filament>
                 {
                     Data = filament,
                     StatusCode = StatusCode.OK
@@ -173,7 +173,7 @@ namespace _3dPrinter.Service.Implementations
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Filament>()
+                return new BaseResponse<Filament>
                 {
                     Description = $"[Edit] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError

@@ -11,9 +11,9 @@ public class MyModelViewModel
     
     [ForeignKey("Filament")]
     public int? FilamentId { get; set; }
-    public virtual Entity.Filament Filament { get; set; }
+    public Entity.Filament Filament { get; set; }
     [ForeignKey("Customer")]
     public int? CustomerId { get; set; }
-    public virtual Entity.Customer Customer { get; set; }
+    public Entity.Customer Customer { get; set; }
     public DateTime TimeOfPrint { get; set; }
 }

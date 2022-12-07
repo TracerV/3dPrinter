@@ -9,23 +9,30 @@ using _3dPrinter.Domain.Response;
 using _3dPrinter.Domain.ViewModels.MyModel;
 using _3dPrinter.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace _3dPrinter.Service.Implementations;
 
-public class MyModelService:IMyModelService
+public class MyModelService : IMyModelService
 {
     private readonly IBaseRepository<MyModel> _modelRepository;
-
-    public MyModelService(IBaseRepository<MyModel> modelRepository)
+    private readonly IBaseRepository<Filament> _filamentRepository;
+    private readonly IBaseRepository<Customer> _customerRepository;
+    public MyModelService(IBaseRepository<MyModel> modelRepository, IBaseRepository<Filament> filamentRepository, IBaseRepository<Customer> customerRepository)
     {
         _modelRepository = modelRepository;
+        _filamentRepository = filamentRepository;
+        _customerRepository = customerRepository;
     }
 
     public IBaseResponse<List<MyModel>> GetModels()
     {
         try
         {
-            var models = _modelRepository.GetAll().ToList();
+            var models = _modelRepository.GetAll()
+                .Include(fl=>fl.Filament)
+                .Include(ct=>ct.Customer)
+                .ToList();
             if (!models.Any())
             {
                 return new BaseResponse<List<MyModel>>()
@@ -34,6 +41,7 @@ public class MyModelService:IMyModelService
                     StatusCode = StatusCode.OK
                 };
             }
+
             return new BaseResponse<List<MyModel>>()
             {
                 Data = models,
@@ -58,8 +66,8 @@ public class MyModelService:IMyModelService
             {
                 Name = viewModel.Name,
                 Cost = viewModel.Cost,
-                Filament= viewModel.Filament,
-                Customer = viewModel.Customer,
+                FilamentId = viewModel.FilamentId,
+                CustomerId = viewModel.CustomerId,
                 TimeOfPrint = viewModel.TimeOfPrint
             };
             await _modelRepository.Create(model);
@@ -93,6 +101,7 @@ public class MyModelService:IMyModelService
                     Data = false
                 };
             }
+
             await _modelRepository.Delete(model);
             return new BaseResponse<bool>()
             {
@@ -114,7 +123,10 @@ public class MyModelService:IMyModelService
     {
         try
         {
-            var model = await _modelRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
+            var model = await _modelRepository.GetAll()
+                .Include(fl=>fl.Filament)
+                .Include(ct=>ct.Customer)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (model == null)
             {
                 return new BaseResponse<MyModelViewModel>()
@@ -123,15 +135,17 @@ public class MyModelService:IMyModelService
                     StatusCode = StatusCode.NotFound
                 };
             }
+
             var data = new MyModelViewModel()
             {
                 Id = model.Id,
                 Name = model.Name,
                 Cost = model.Cost,
-                Filament= model.Filament,
+                Filament = model.Filament,
                 Customer = model.Customer,
-                TimeOfPrint = model.TimeOfPrint
-                
+                TimeOfPrint = model.TimeOfPrint,
+                FilamentId= model.FilamentId,
+                CustomerId = model.CustomerId,
             };
             return new BaseResponse<MyModelViewModel>()
             {
@@ -162,10 +176,11 @@ public class MyModelService:IMyModelService
                     StatusCode = StatusCode.NotFound
                 };
             }
+
             model.Name = viewModel.Name;
             model.Cost = viewModel.Cost;
-            model.Filament = viewModel.Filament;
-            model.Customer = viewModel.Customer;
+            model.FilamentId = viewModel.FilamentId;
+            model.CustomerId = viewModel.CustomerId;
             model.TimeOfPrint = viewModel.TimeOfPrint;
 
             await _modelRepository.Update(model);

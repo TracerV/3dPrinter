@@ -13,5 +13,5 @@ public interface IMyModelService
     Task<IBaseResponse<bool>> DeleteModel(int id);
     Task<IBaseResponse<MyModelViewModel>> GetModel(int id);
     Task<IBaseResponse<MyModel>> Edit(int id, MyModelViewModel model);
-
+ 
 }

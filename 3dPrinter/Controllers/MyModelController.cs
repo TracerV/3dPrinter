@@ -88,7 +88,7 @@ public class MyModelController : Controller
             _filamentService.GetFilaments().Data.Select(ut => new SelectListItem()
         {
             Value = ut.Id.ToString(),
-            Text = ut.Name
+            Text = ut.Name+" ("+ut.Manufacturer+")"
         }).ToList();
 
         var defItem = new SelectListItem()

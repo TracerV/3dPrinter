@@ -63,7 +63,8 @@ public class MyModelService : IMyModelService
                 Cost = viewModel.Cost,
                 FilamentId = viewModel.FilamentId,
                 CustomerId = viewModel.CustomerId,
-                TimeOfPrint = viewModel.TimeOfPrint
+                TimeOfPrint = viewModel.TimeOfPrint,
+                Weight=viewModel.Weight
             };
             await _modelRepository.Create(model);
             return new BaseResponse<MyModel>()
@@ -141,6 +142,7 @@ public class MyModelService : IMyModelService
                 TimeOfPrint = model.TimeOfPrint,
                 FilamentId= model.FilamentId,
                 CustomerId = model.CustomerId,
+                Weight = model.Weight
             };
             return new BaseResponse<MyModelViewModel>()
             {
@@ -177,6 +179,7 @@ public class MyModelService : IMyModelService
             model.FilamentId = viewModel.FilamentId;
             model.CustomerId = viewModel.CustomerId;
             model.TimeOfPrint = viewModel.TimeOfPrint;
+            model.Weight = viewModel.Weight;
 
             await _modelRepository.Update(model);
             return new BaseResponse<MyModel>()

@@ -11,6 +11,8 @@ public class MyModel
     public string Name { get; set; }
     public decimal Cost { get; set; }
     
+    public int? Weight { get; set; }
+    
     [ForeignKey("Filament")]
     public int? FilamentId { get; set; }
     public virtual Filament Filament { get; set; }

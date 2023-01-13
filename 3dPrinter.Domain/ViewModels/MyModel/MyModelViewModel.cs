@@ -8,6 +8,7 @@ public class MyModelViewModel
     public int Id { get; set; }
     public string Name { get; set; }
     public decimal Cost { get; set; }
+    public int?  Weight { get; set; }
     
     [ForeignKey("Filament")]
     public int? FilamentId { get; set; }

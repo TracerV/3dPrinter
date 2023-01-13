@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -5,6 +6,7 @@ using _3dPrinter.Domain.ViewModels.MyModel;
 using _3dPrinter.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace _3dPrinter.Controllers;
 
@@ -66,6 +68,8 @@ public class MyModelController : Controller
             var resp = new MyModelViewModel();
             ViewBag.FilamentList = FilamentList();
             ViewBag.CustomerList = CustomerList();
+            resp.TimeOfPrint = new TimeSpan(0, 0, 0, 0);
+            
             return PartialView("AddEditPartial", resp);
         }
 
@@ -84,7 +88,6 @@ public class MyModelController : Controller
     private List<SelectListItem> FilamentList()
     {
         var lstItems =
-            // List<Filament> items = _filamentService.GetFilaments().Data("Name", "", 1, 1000);
             _filamentService.GetFilaments().Data.Select(ut => new SelectListItem()
         {
             Value = ut.Id.ToString(),
@@ -105,7 +108,6 @@ public class MyModelController : Controller
     private List<SelectListItem> CustomerList()
     {
         var lstItems =
-            // List<Filament> items = _filamentService.GetFilaments().Data("Name", "", 1, 1000);
             _customerService.GetCustomers().Data.Select(ut => new SelectListItem()
         {
             Value = ut.Id.ToString(),

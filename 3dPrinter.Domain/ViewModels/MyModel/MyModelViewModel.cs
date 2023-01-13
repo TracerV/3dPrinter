@@ -15,5 +15,5 @@ public class MyModelViewModel
     [ForeignKey("Customer")]
     public int? CustomerId { get; set; }
     public Entity.Customer Customer { get; set; }
-    public DateTime TimeOfPrint { get; set; }
+    public TimeSpan TimeOfPrint { get; set; }
 }

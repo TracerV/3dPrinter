@@ -16,7 +16,7 @@
         <th>ModelName</th>
         <th>Filament</th>
         <th>Customer</th>
-        <th>TimeOfPrint</th>
+        <th style="text-align: center;">TimeOfPrint (hh:mm)</th>
         <th>Cost</th>
     </tr>
     </thead>
@@ -41,7 +41,7 @@
                 <td>@item.Name</td>
                 <td>@item.Filament.Name (@item.Filament.Manufacturer)</td>
                 <td>@item.Customer.Name</td>
-                <td>@item.TimeOfPrint</td>
+                <td style="text-align: center;">@item.TimeOfPrint.ToString($"hh\\:mm")</td>
                 <td>@item.Cost</td>
                 <td>
                     <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addModel"

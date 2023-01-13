@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -16,6 +17,6 @@ public class MyModel
     [ForeignKey("Customer")]
     public int? CustomerId { get; set; }
     public virtual Customer Customer { get; set; }
-    public DateTime TimeOfPrint { get; set; }
+    public TimeSpan TimeOfPrint { get ; set; }
     
 }

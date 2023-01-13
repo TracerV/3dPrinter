@@ -9,22 +9,17 @@ using _3dPrinter.Domain.Response;
 using _3dPrinter.Domain.ViewModels.MyModel;
 using _3dPrinter.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace _3dPrinter.Service.Implementations;
 
 public class MyModelService : IMyModelService
 {
     private readonly IBaseRepository<MyModel> _modelRepository;
-    private readonly IBaseRepository<Filament> _filamentRepository;
-    private readonly IBaseRepository<Customer> _customerRepository;
-    public MyModelService(IBaseRepository<MyModel> modelRepository, IBaseRepository<Filament> filamentRepository, IBaseRepository<Customer> customerRepository)
+
+    public MyModelService(IBaseRepository<MyModel> modelRepository)
     {
         _modelRepository = modelRepository;
-        _filamentRepository = filamentRepository;
-        _customerRepository = customerRepository;
     }
-
     public IBaseResponse<List<MyModel>> GetModels()
     {
         try
